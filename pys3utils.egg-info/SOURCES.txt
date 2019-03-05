@@ -19,3 +19,5 @@ pys3utils.egg-info/dependency_links.txt
 pys3utils.egg-info/entry_points.txt
 pys3utils.egg-info/top_level.txt
 pys3utils.egg-info/zip-safe
+pys3utils/__pycache__/__init__.cpython-35.pyc
+pys3utils/__pycache__/utils.cpython-35.pyc
