@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 import sys, os
 
-version = '0.11'
+version = '0.111'
 
 this_directory = os.path.abspath(os.path.dirname(__file__))
 with open(os.path.join(this_directory, 'README.md'), encoding='utf-8') as f:
@@ -18,7 +18,7 @@ setup(name='pys3utils',
       author_email='robert.speare@gmail.com',
       url='https://github.com/rspeare/pys3utils',
       license='MIT',
-      packages=find_packages(exclude=['Makefile', 'tests']),
+      packages=find_packages(exclude=['Makefile', 'tests', '.gitignore']),
       include_package_data=True,
       zip_safe=True,
       install_requires=[

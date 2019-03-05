@@ -1,6 +1,6 @@
 Metadata-Version: 2.1
 Name: pys3utils
-Version: 0.11.dev0
+Version: 0.111.dev0
 Summary: Python utilities for aws s3
 Home-page: https://github.com/rspeare/pys3utils
 Author: Rob Speare
@@ -8,7 +8,7 @@ Author-email: robert.speare@gmail.com
 License: MIT
 Description: # pys3utils
         
-        (Python s3 scripts and utilities). This library is intended to 
+        Python s3 scripts and utilities. This library is intended to 
         help push/pull resources from s3.
         
         ## Usage

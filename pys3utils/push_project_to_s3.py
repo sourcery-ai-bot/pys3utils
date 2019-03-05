@@ -16,8 +16,7 @@ import os
 import boto3
 import stat
 import sys
-import time
-from utils import upload_dir
+from utils import upload_dir, push_project_to_s3
 
 
 def remove_readonly(func, path, excinfo):
@@ -29,32 +28,13 @@ def remove_readonly(func, path, excinfo):
     func(path)
 
 
-def main():
+if __name__ == "__main__":
     if not sys.argv[1]:
         logger.critical('You must provide a directory to push!')
         exit(1)
 
-    directory = os.path.abspath(sys.argv[1])
     s3_resource = boto3.resource('s3')
-    bucket = s3_resource.Bucket(sys.argv[2])
-    syncfile = os.path.join(directory,'.s3_sync_timestamp')
-    try:
-        print("uploading directory {}".format(directory))
-        print('-----------------------------------------')
-        with open(syncfile, 'w+') as f:
-            ts = time.time()
-            f.write('last updated/pushed to s3:'+ str(ts))
-
-        upload_dir(directory, bucket=bucket, master_directory=directory, time_stamp_file=syncfile)
-
-    except Exception as ex:
-        print(ex)
-
-    return
-
-if __name__ == "__main__":
-    main()
-
+    push_project_to_s3(sys.argv[1], sys.argv[2])
 # OLD for cloning and pushing
 #
 # # Create temp directory

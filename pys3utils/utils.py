@@ -1,6 +1,7 @@
 import os
 import boto3
 import uuid
+import time
 
 def create_bucket_name(bucket_prefix):
     # The generated bucket name must be between 3 and 63 chars long
@@ -58,3 +59,22 @@ def upload_dir(path, **kwargs):
             upload_dir(filepath, **kwargs)
         else:
             upload_file(filepath, **kwargs)
+
+
+def push_project_to_s3(project_path, bucket_name, s3=None):
+    s3_resource = boto3.resource('s3') if not s3 else s3
+    bucket = bucket_name
+    syncfile = os.path.join(project_path,'.s3_sync_timestamp')
+    try:
+        print("uploading directory {}".format(directory))
+        print('-----------------------------------------')
+        with open(syncfile, 'w+') as f:
+            ts = time.time()
+            f.write('last updated/pushed to s3:'+ str(ts))
+
+        upload_dir(project_path, bucket=bucket, master_directory=project_path, time_stamp_file=syncfile)
+
+    except Exception as ex:
+        print(ex)
+
+    return
