@@ -15,10 +15,7 @@ def create_s3_bucket(bucket_prefix, s3_connection):
     """
     session = boto3.session.Session()
     current_region = session.region_name
-    if current_region == 'us-east-1':
-        location_constraint = 'us-west-2'
-    else:
-        location_constraint = region
+    location_constraint = 'us-west-2' if current_region == 'us-east-1' else region
     bucket_name = create_bucket_name(bucket_prefix)
     bucket_response = s3_connection.create_bucket(
         Bucket=bucket_name,
